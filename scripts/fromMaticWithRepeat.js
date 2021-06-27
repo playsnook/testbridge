@@ -43,9 +43,22 @@ async function main() {
   const receipt = await tx.wait(1);
   console.log('Receipt:');
   console.log(receipt);
-  await delay(1000*60*30);
   
-  const exitCallData = await maticPOSClient.exitERC20(tx.hash, {from: deployer, encodeAbi: true});
+  let i = 0;
+  let done = false;
+  let exitCallData;
+  while (!done) {
+    await delay(1000*60*10);
+    i += 1;
+    try {
+      exitCallData = await maticPOSClient.exitERC20(tx.hash, {from: deployer, encodeAbi: true});
+      done = true;
+    } catch(err) {
+      console.log(err.message);
+      console.log('Retrying, i=', i)
+    }
+  }
+  
   console.log('Created exit transaction:')
   console.log(exitCallData);
   const tx2 = await wallet.sendTransaction({

@@ -1,5 +1,5 @@
-require('dotenv').config();
 
+const addresses = require('../addresses.json');
 const { network: {name: networkName }} = require('hardhat');
 
 module.exports = async ({
@@ -8,20 +8,20 @@ module.exports = async ({
 }) => {
   const {deploy} = deployments;
   const {deployer} = await getNamedAccounts();
-  const deployResult = await deploy('CtsTokenL2', {
+  const deployResult = await deploy('SxrTokenL2', {
     from: deployer,
     // gasLimit: 50000,
     // gasPrice: 60000000000,
     args: [
-      'CtsTokenL2',
-      'CtsTokenL2',
+      'SxrTokenL2',
+      'SxrTokenL2',
       400000,
       18,
-      process.env.ChildChainManagerProxy
+      addresses.ChildChainManagerProxy
     ],
     log: true,
   });
   // console.log(deployResult);
 };
-module.exports.tags = ['CtsTokenL2'];
+module.exports.tags = ['VivaTokenL2'];
 module.exports.skip = async () => networkName !== 'mumbai';

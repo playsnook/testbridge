@@ -1448,7 +1448,7 @@ pragma solidity 0.6.6;
 
 
 
-contract CtsTokenL2 is
+contract SxrTokenL2 is
     ERC20,
     IChildToken,
     AccessControlMixin,
@@ -1464,7 +1464,7 @@ contract CtsTokenL2 is
         uint8 decimals_,
         address childChainManager
     ) public ERC20(name_, symbol_) {
-        _setupContractId("CtsTokenL2");
+        _setupContractId("SxrTokenL2");
         _setupDecimals(decimals_);
         _setupRole(DEFAULT_ADMIN_ROLE, _msgSender());
         _setupRole(DEPOSITOR_ROLE, childChainManager);
@@ -1513,5 +1513,9 @@ contract CtsTokenL2 is
     // Simulation of burn by the game
     function burn(uint256 amount) public only(DEFAULT_ADMIN_ROLE) {
       _burn(_msgSender(), amount);
+    }
+
+    function mint(address user, uint256 amount) public only(DEFAULT_ADMIN_ROLE) {
+        _mint(user, amount);
     }
 }
