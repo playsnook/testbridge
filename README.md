@@ -72,6 +72,15 @@ We added burn function on the L2 token contract. Test with
 > npx hardhat --network mumbai run scripts/burnOnMatic.js
 ```
 
+## Possible errors
+
+The test network RPC can be down for some time (~2 hours), don't give up. Wait and try again. The error indicating there are problems on RPC is 
+
+```
+PollingBlockTracker - encountered an error while attempting to update latest block
+```
+
+Ref: https://www.gitmemory.com/issue/trufflesuite/truffle/3356/780754223
 
 ## References
 https://docs.matic.network/docs/develop/ethereum-matic/pos/deployment
